@@ -1,10 +1,20 @@
 %% Close all figures
 close all;
 
+
 %% Generate simulated data
-simData = generate_simdata(256,'C:\Users\aleks\OneDrive\Skole\DTU\1. Semester\Intro til MatTek\3 Ugers\MR Projekt');
+simData = generate_simdata(256,'C:\Users\chris\MATLAB\Projects\MR');
 figure;
 imagesc(simData);
+colormap('gray');
+colorbar;
+
+
+%% Padding
+
+simPad = signal_limited(simData, 0.5);
+figure;
+imagesc(simPad);
 colormap('gray');
 colorbar;
 
@@ -15,13 +25,13 @@ imagesc(phanton_im);
 colorbar;
 
 %% Fourier transforms image data
-sim_fourier = fft2(simData);
+sim_fourier = fft2(simPad);
 figure;
 imagesc(log(abs(fftshift(sim_fourier))));
 colorbar;
 
 %% Adds noise to image data
-im_noisy = addnoise(sim_fourier, 0);
+im_noisy = addnoise(sim_fourier, 10);
 figure;
 imagesc(log(abs(fftshift(im_noisy))));
 colorbar;
@@ -29,6 +39,6 @@ colorbar;
 %% Invers Fourier transforms image data
 inv_fourier = ifft2(im_noisy);
 figure;
-imagesc(log(abs(inv_fourier)));
+imagesc((abs(inv_fourier)));
 colormap('gray');
 colorbar;
