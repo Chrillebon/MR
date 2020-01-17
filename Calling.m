@@ -42,10 +42,8 @@ figure;
 imagesc((abs(inv_fourier)));
 colormap('gray');
 colorbar;
-%% Error between image and reconstructed image
+%% Calculates error between image and reconstructed image
 Error=error_measure(simData,inv_fourier);
 disp(Error);
-%% Graphing 
+%% Graphs error at different paddings 
 graph=graphing_error(noise_array,pad_array,simData);
-
-
