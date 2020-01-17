@@ -3,7 +3,7 @@ close all;
 
 
 %% Generate simulated data
-simData = generate_simdata(256,'C:\Users\Marcu\MATLAB\Projects\untitled');
+simData = generate_simdata(256,'C:\Users\aleks\OneDrive\Skole\DTU\1. Semester\Intro til MatTek\3 Ugers\MR Projekt');
 figure;
 imagesc(simData);
 colormap('gray');
@@ -45,5 +45,7 @@ colorbar;
 %% Calculates error between image and reconstructed image
 Error=error_measure(simData,inv_fourier);
 disp(Error);
+
 %% Graphs error at different paddings 
-graph=graphing_error(noise_array,pad_array,simData);
+graph=graphing_error([30,40,50],[30,40,50],simData);
+
