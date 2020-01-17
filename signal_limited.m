@@ -13,6 +13,6 @@ signal_pad(y-w:y,:) = 0;
 % Left
 signal_pad(:,1:w) = 0;
 % Right
-signal_pad(:,x-w:x) = 0;
+signal_pad(:,x- w:x) = 0;
 
 end
