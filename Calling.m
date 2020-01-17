@@ -33,6 +33,7 @@ figure;
 imagesc(log(abs(signal_pad)));
 colorbar;
 
+
 %% Invers Fourier transforms image data
 inv_fourier = ifft2(ifftshift(signal_pad));
 figure;
