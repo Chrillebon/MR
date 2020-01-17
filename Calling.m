@@ -3,7 +3,7 @@ close all;
 
 
 %% Generate simulated data
-simData = generate_simdata(256,'C:\Users\chris\MATLAB\Projects\MR');
+simData = generate_simdata(256,'C:\Users\Marcu\MATLAB\Projects\untitled');
 figure;
 imagesc(simData);
 colormap('gray');
@@ -12,7 +12,7 @@ colorbar;
 
 %% Padding
 
-simPad = signal_limited(simData, 0.5);
+simPad = signal_limited(simData, 1);
 figure;
 imagesc(simPad);
 colormap('gray');
@@ -31,7 +31,7 @@ imagesc(log(abs(fftshift(sim_fourier))));
 colorbar;
 
 %% Adds noise to image data
-im_noisy = addnoise(sim_fourier, 10);
+im_noisy = addnoise(sim_fourier, 0);
 figure;
 imagesc(log(abs(fftshift(im_noisy))));
 colorbar;
@@ -42,3 +42,10 @@ figure;
 imagesc((abs(inv_fourier)));
 colormap('gray');
 colorbar;
+%% Error between image and reconstructed image
+Error=error_measure(simData,inv_fourier);
+disp(Error);
+%% Graphing 
+graph=graphing_error(noise_array,pad_array,simData);
+
+
