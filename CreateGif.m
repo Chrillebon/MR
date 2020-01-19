@@ -30,5 +30,7 @@ for i= 2:n
     imwrite(imresize(squeeze(data(:,i,:)), [n,m])', [filename, 'RL.gif'], 'WriteMode', 'append', 'Delaytime', 0.05);
 end
 
+sliceViewer(data);
+
 end
 

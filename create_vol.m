@@ -7,10 +7,28 @@
 % last lines letting the user input the value from the histogram to keep.
 
 %% Function
-function vol = create_vol(file)
+function vol = create_vol(data, X, Y, Z)
+
+% Ease of use
+if nargin == 1
+    X = 1:size(data,1);
+    Y = 1:size(data,2);
+    Z = 1:size(data,3);
+else
+    if isempty(X)
+        X = 1:size(data,1);
+    end
+    if isempty(Y)
+        Y = 1:size(data,2);
+    end
+    if isempty(Z)
+        Z = 1:size(data,3);
+    end
+end
+
 % Creating and showing histogram
 figure;
-h = histogram(file,50);
+h = histogram(data(1:size(data,1),1:size(data,2),1:size(data,3)),50);
 
 % leftmost value, rightmost values saved
 groups = [0,0];
@@ -41,13 +59,15 @@ end
 boundry = (groups(length(groups)-1)-1) * h.BinWidth;
         
 % User input, if ever needed
-%boundry = input('Hvad er den værdi, som på billedet matcher med den/de sidste spikes?');
-
+if boundry == 0
+    boundry = input('Auto-detection of volume failed.\n\nPlease enter the value minimum value of the color to create volume from: ');
+end
+    
 % Creating logical volume
-vol = file > boundry;
+vol = data(X,Y,Z) > boundry;
 
 % Showing volume
 figure;
-vol = volshow(smooth3(vol));
+volshow(smooth3(vol));
 
 end

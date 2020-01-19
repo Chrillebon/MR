@@ -12,20 +12,23 @@ if tau > 1 && tau <= 100
     tau = tau / 100;
 end
 
-[m,n] = size(im_DFT); 
+[m,n,o] = size(im_DFT); 
 
-% Where noise is to be added
-IND = randperm(m*n,round(m*n*tau));
-mask = zeros(m,n);
-mask(IND) = 1;
+% for multiple layers
+for i=1:o
+    % Where noise is to be added
+    IND = randperm(m*n,round(m*n*tau));
+    mask = zeros(m,n);
+    mask(IND) = 1;
 
-% noise that can be added, if IND(i,o) == 1
-r = randn(m,n); r = r/norm(r,'fro');
+    % noise that can be added, if IND(i,o) == 1
+    r = randn(m,n); r = r/norm(r,'fro');
 
-% Layer of wanted noise
-e = mask.*r*norm(im_DFT,'fro');
+    % Layer of wanted noise
+    e = mask.*r*norm(im_DFT(:,:,i),'fro');
 
-% Inserting noise
-im_noisy = im_DFT + e;
+    % Inserting noise
+    im_noisy(:,:,i) = im_DFT(:,:,i) + e;
+end
 
 end

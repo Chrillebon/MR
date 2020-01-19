@@ -25,14 +25,11 @@ border_size = floor(size(signal,1)*(0.5-frac/2));
 
 % For all slices of data
 for i=1:size(signal,3)
-    % Top
-    signal_pad(1:border_size,:,i) = 0;
-    % Bottom
-    signal_pad(height-border_size+1:height,:,i) = 0;
-    % Left
-    signal_pad(:,1:border_size,i) = 0;
-    % Right
-    signal_pad(:,width-border_size+1:width,i) = 0;
+    
+    % Vertical
+    signal_pad(height/2-border_size:height/2+border_size,:,i) = 0;
+    % Horizontal
+    signal_pad(:,width/2-border_size:width/2+border_size,i) = 0;
 end
 
 % Back to original
