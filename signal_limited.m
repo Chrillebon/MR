@@ -1,12 +1,10 @@
 %% Header
 
 % This function takes the fourier transformed data and places padding, the
-% value '0', at the "least significant" portion of the picture, 
+% value '0', at the "least significant" portion of the picture (the center), 
 % effectively reducing the accuracy of the image, keeping only the sharp
 % boundries of the image (removing the softer transitions).
 % Keeping only frac of the image.
-
-% WARNING: Multi-slice limiting is still a work in progress!!!
 
 %% Function
 function signal_pad = signal_limited(signal, frac)
@@ -16,8 +14,8 @@ if frac > 1 && frac <= 100
     frac = frac / 100;
 end
 
-% Shifting important info to center
-signal_pad = fftshift(signal);
+% Init
+signal_pad = signal;
 
 width = size(signal,2);
 height = size(signal,1);
@@ -31,8 +29,5 @@ for i=1:size(signal,3)
     % Horizontal
     signal_pad(:,width/2-border_size:width/2+border_size,i) = 0;
 end
-
-% Back to original
-signal_pad = ifftshift(signal_pad);
 
 end

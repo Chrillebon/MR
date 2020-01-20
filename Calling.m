@@ -28,7 +28,11 @@ figure;
 imagesc(log(abs(fftshift(im_noisy))));
 colorbar;
 %% Padding
+<<<<<<< HEAD
 signal_pad = signal_limited((im_noisy), 1);
+=======
+signal_pad = signal_limited(fftshift(im_noisy), 1);
+>>>>>>> 299047aa09feb4eb8d8c90be6ccfde9542ba91ca
 figure;
 imagesc(log(abs(fftshift(signal_pad))));
 colorbar;

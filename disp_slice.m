@@ -31,26 +31,26 @@ elseif nargin == 3 % 2D, some of the image --------------------------------
     
     % Choosing the correct slice
     if isempty(X)
-        X = 1:size(data,2);
+        X = 1:size(data,1);
     elseif strcmpi(X, 'all')
-        X = 1:size(data,2);
+        X = 1:size(data,1);
     end
     if isempty(Y)
-        Y = 1:size(data,1);
+        Y = 1:size(data,2);
     elseif strcmpi(Y, 'all')
-        Y = 1:size(data,1);
+        Y = 1:size(data,2);
     end
     
     if real(data) == data
         % Image
         figure;
-        imagesc(data(Y,X));
+        imagesc(data(X,Y));
         colormap('gray');
         colorbar;
     else
         % Fourier-data
         figure;
-        imagesc(log(abs(fftshift(data(Y,X)))));
+        imagesc(log(abs(fftshift(data(X,Y)))));
         colorbar;
     end
     
@@ -77,13 +77,13 @@ else % 3D -----------------------------------------------------------------
     if real(data) == data
         % Image
         figure;
-        imagesc(data(Y,X,Z));
+        imagesc(squeeze(data(X,Y,Z)));
         colormap('gray');
         colorbar;
     else
         % Fourier-data
         figure;
-        imagesc(log(abs(fftshift(data(Y,X,Z)))));
+        imagesc(log(abs(fftshift(squeeze(data(X,Y,Z))))));
         colorbar;
     end
 
