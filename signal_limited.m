@@ -9,7 +9,7 @@
 
 %% Function
 function signal_pad = signal_limited(signal, frac)
-
+frac=1-frac;
 % Percent to range [0,1]
 if frac > 1 && frac <= 100
     frac = frac / 100;
@@ -22,7 +22,7 @@ width = size(signal,1);
 height = width;
 
 % Keeping "frac" of the image
-border_size = floor(width*(0.5-frac/2));
+border_size = floor(width*(0.5-(1-frac)/2));
 
 % For all slices of data
 % Adds borders of '0'

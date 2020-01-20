@@ -13,13 +13,18 @@ if tau > 1 && tau <= 100
 end
 
 [m,n,o] = size(im_DFT); 
-fronorm=0;
-for i=1:o
-    fronorm=fronorm+norm(im_DFT(:,:,i),'fro');
+fronormRe=0;
+fronormIm=0;
+for u=1:o
+    fronmormRe=fronormRe+norm(real(im_DFT(:,:,u)),'fro');
+    fronormIm=fronormIm+norm(imag(im_DFT(:,:,u)),'fro')*i;
 end
-avfronorm=fronorm/o;
+avfronormRe=fronormRe/o;
+avfronormIm=fronormIm/o;
+
+
 % for multiple layers
-for i=1:o
+for u=1:o
     % mask is noiselevel
     IND = randperm(m*n,round(m*n*tau)); %randomly chooses tau*100 percent of pixels
     mask = zeros(m,n); %create m-by-n matrix of zeros
@@ -30,10 +35,11 @@ for i=1:o
     r = r/norm(r,'fro'); %Every pixel scaled down by it's values' "size"
 
     % e is a picture of noise scaled with noiselevel 
-    e = mask.*r*avfronorm; 
-
+    eRe = mask.*r*avfronormRe; 
+    eIm = mask.*r*avfronormIm;
     % Inserting noise on picture
-    im_noisy(:,:,i) = im_DFT(:,:,i) + e;
+    im_noisy(:,:,u) = im_DFT(:,:,u) + eRe;
+    im_noisy(:,:,u) = im_noisy(:,:,u) + eIm;
 end
 
 end

@@ -4,42 +4,28 @@ clear all;
 
 %% Generate simulated data
 simData = generate_simdata(256,'C:\Users\Marcu\MATLAB\Projects\untitled');
-figure;
-imagesc(simData);
-colormap('gray');
-colorbar;
+disp_slice(simData);
 
 
 %% Generate phantom image
 phanton_im = phantom(256,256);
-figure;
-imagesc(phanton_im);
-colorbar;
+disp_slice(phantom_im);
 
 %% Fourier transforms image data
-sim_fourier = fft2(simData);
-figure;
-imagesc(log(abs(fftshift(sim_fourier))));
-colorbar;
+sim_fourier = ft2(simData);
+disp_slice(sim_fourier);
 
 %% Adds noise to image data
-im_noisy = addnoise(sim_fourier, 0);
-figure;
-imagesc(log(abs(fftshift(im_noisy))));
-colorbar;
+im_noisy = addnoise(sim_fourier, 40);
+disp_slice(im_noisy);
 %% Padding
-signal_pad = signal_limited((im_noisy), 1);
-figure;
-imagesc(log(abs(fftshift(signal_pad))));
-colorbar;
+signal_pad = signal_limited((im_noisy), 10);
+disp_slice(signal_pad);
 
 
 %% Invers Fourier transforms image data
-inv_fourier = ifft2(ifftshift(signal_pad));
-figure;
-imagesc((abs(inv_fourier)));
-colormap('gray');
-colorbar;
+inv_fourier = ift2(signal_pad);
+disp_slice(inv_fourier);
 %% Calculates error between image and reconstructed image
 Error=error_measure(simData,inv_fourier);
 disp(Error);
