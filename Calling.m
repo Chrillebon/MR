@@ -3,7 +3,7 @@ close all;
 clear all;
 
 %% Generate simulated data
-simData = generate_simdata(256,'C:\Users\aleks\OneDrive\Skole\DTU\1. Semester\Intro til MatTek\3 Ugers\MR Projekt');
+simData = generate_simdata(256,'C:\Users\Marcu\MATLAB\Projects\untitled');
 figure;
 imagesc(simData);
 colormap('gray');
@@ -23,12 +23,12 @@ imagesc(log(abs(fftshift(sim_fourier))));
 colorbar;
 
 %% Adds noise to image data
-im_noisy = addnoise(sim_fourier, 10);
+im_noisy = addnoise(sim_fourier, 0);
 figure;
 imagesc(log(abs(fftshift(im_noisy))));
 colorbar;
 %% Padding
-signal_pad = signal_limited(im_noisy, 0.8);
+signal_pad = signal_limited(fftshift(im_noisy), 1);
 figure;
 imagesc(log(abs(fftshift(signal_pad))));
 colorbar;
@@ -45,6 +45,6 @@ Error=error_measure(simData,inv_fourier);
 disp(Error);
 
 %% Graphs error at different paddings 
-noise_array=[0.1:0.1:1];
-pad_array=[0:0.1:1];
+noise_array=[0:0.2:1];
+pad_array=[0:0.01:1];    
 graph=graphing_error(noise_array,pad_array,simData);
