@@ -13,21 +13,26 @@ if tau > 1 && tau <= 100
 end
 
 [m,n,o] = size(im_DFT); 
-
+fronorm=0;
+for i=1:o
+    fronorm=fronorm+norm(im_DFT(:,:,i),'fro');
+end
+avfronorm=fronorm/o;
 % for multiple layers
 for i=1:o
-    % Where noise is to be added
-    IND = randperm(m*n,round(m*n*tau));
-    mask = zeros(m,n);
-    mask(IND) = 1;
+    % mask is noiselevel
+    IND = randperm(m*n,round(m*n*tau)); %randomly chooses tau*100 percent of pixels
+    mask = zeros(m,n); %create m-by-n matrix of zeros
+    mask(IND) = 1; %Set pixelvalue=1 where noise is to be added
 
-    % noise that can be added, if IND(i,o) == 1
-    r = randn(m,n); r = r/norm(r,'fro');
+    % r is picture of noise 
+    r = randn(m,n); % Normal distributes noise on a 2D array
+    r = r/norm(r,'fro'); %Every pixel scaled down by it's values' "size"
 
-    % Layer of wanted noise
-    e = mask.*r*norm(im_DFT(:,:,i),'fro');
+    % e is a picture of noise scaled with noiselevel 
+    e = mask.*r*avfronorm; 
 
-    % Inserting noise
+    % Inserting noise on picture
     im_noisy(:,:,i) = im_DFT(:,:,i) + e;
 end
 
