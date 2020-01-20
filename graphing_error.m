@@ -5,7 +5,7 @@ for i=1:length(noise_array)
         sim_fourier = fft2(simData);
         im_noisy = addnoise(sim_fourier, noise_array(i));
     for k=1:length(pad_array)
-        signal_pad = signal_limited(fftshift(im_noisy), pad_array(k));
+        signal_pad = signal_limited(im_noisy, pad_array(k));
         inv_fourier = ifft2(ifftshift(signal_pad));
         Error(k)=error_measure(simData,inv_fourier);
     end
