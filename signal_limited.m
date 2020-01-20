@@ -5,6 +5,7 @@
 % effectively reducing the accuracy of the image, keeping only the sharp
 % boundries of the image (removing the softer transitions).
 % Keeping only frac of the image.
+% Only works on square images
 
 %% Function
 function signal_pad = signal_limited(signal, frac)
@@ -16,18 +17,24 @@ end
 
 % Init
 signal_pad = signal;
+% Assumes square picture
+width = size(signal,1);
+height = width;
 
-width = size(signal,2);
-height = size(signal,1);
-border_size = floor(size(signal,1)*(0.5-frac/2));
+% Keeping "frac" of the image
+border_size = floor(width*(0.5-frac/2));
 
 % For all slices of data
+% Adds borders of '0'
 for i=1:size(signal,3)
-    
-    % Vertical
-    signal_pad(height/2-border_size:height/2+border_size,:,i) = 0;
-    % Horizontal
-    signal_pad(:,width/2-border_size:width/2+border_size,i) = 0;
+    % Top
+    signal_pad(1:border_size,:,i) = 0;
+    % Bottom
+    signal_pad(height-border_size+1:height,:,i) = 0;
+    % Left
+    signal_pad(:,1:border_size,i) = 0;
+    % Right
+    signal_pad(:,width-border_size+1:width,i) = 0;
 end
 
 end

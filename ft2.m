@@ -15,6 +15,7 @@ if ~(length(size(data)) == 3 || length(size(data)) == 2)
     return;
 end
 
-fourierData = fft2(data);
+for i=1:size(data,3)
+    fourierData(:,:,i) = fftshift(fft2(data(:,:,i)));
 
 end

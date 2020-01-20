@@ -15,6 +15,9 @@ if ~(length(size(data)) == 3 || length(size(data)) == 2)
     return;
 end
 
-imData = abs(ifft2(data));
+% Change of format
+for i=1:size(data,3)
+    imData(:,:,i) = abs(ifft2(ifftshift(data(:,:,i))));
+end
 
 end

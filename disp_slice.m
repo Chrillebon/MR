@@ -12,8 +12,10 @@
 %% Function
 function disp_slice(data, X, Y, Z)
 
+% If only "data" is given
 if nargin == 1 % 2D, full image -------------------------------------------
     
+    % No complex values
     if real(data) == data
         % Image
         figure;
@@ -23,13 +25,13 @@ if nargin == 1 % 2D, full image -------------------------------------------
     else
         % Fourier-data
         figure;
-        imagesc(log(abs(fftshift(data))));
+        imagesc(log(abs(data)));
         colorbar;
     end
         
-elseif nargin == 3 % 2D, some of the image --------------------------------
+elseif nargin == 3 % 2D, dimension of slice given -------------------------
     
-    % Choosing the correct slice
+    % Choosing size of slice
     if isempty(X)
         X = 1:size(data,1);
     elseif strcmpi(X, 'all')
@@ -41,6 +43,7 @@ elseif nargin == 3 % 2D, some of the image --------------------------------
         Y = 1:size(data,2);
     end
     
+    % No complex values
     if real(data) == data
         % Image
         figure;
@@ -50,13 +53,13 @@ elseif nargin == 3 % 2D, some of the image --------------------------------
     else
         % Fourier-data
         figure;
-        imagesc(log(abs(fftshift(data(X,Y)))));
+        imagesc(log(abs(data(X,Y))));
         colorbar;
     end
     
 else % 3D -----------------------------------------------------------------
     
-    % Choosing the correct slice
+    % Choosing size of slice
     if isempty(X)
         X = 1:size(data,2);
     elseif strcmpi(X, 'all')
@@ -73,7 +76,7 @@ else % 3D -----------------------------------------------------------------
         Z = 1:size(data,3);
     end
 
-
+    % No complex values
     if real(data) == data
         % Image
         figure;
@@ -83,7 +86,7 @@ else % 3D -----------------------------------------------------------------
     else
         % Fourier-data
         figure;
-        imagesc(log(abs(fftshift(squeeze(data(X,Y,Z))))));
+        imagesc(log(abs(squeeze(data(X,Y,Z)))));
         colorbar;
     end
 

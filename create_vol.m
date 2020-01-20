@@ -68,6 +68,6 @@ vol = data(X,Y,Z) > boundry;
 
 % Showing volume
 figure;
-volshow(smooth3(vol));
+volshow(smooth3(vol), 'Renderer', 'VolumeRendering');
 
 end

@@ -1,3 +1,10 @@
+%% Header
+
+% This function is used to create an image with or without texture with
+% which the user can test fourier transforming and the capabilities and
+% restrictions of the MRI scanner and the data recieved from it.
+
+%% Function
 function simData = generate_simdata(K, texFiles)
 
 % Texture files
@@ -20,17 +27,17 @@ if nargin == 2
         tex1 = imresize(double( imread([texFiles, '\tex1.png']) )./255, [K, K]);
         tex2 = imresize(double( imread([texFiles, '\tex2.png']) )./255, [K, K]);
         tex3 = imresize(double( imread([texFiles, '\tex3.png']) )./255, [K, K]);
+    else
+        % Phantom image
+        simData = phantom(K);
+        return;
     end
 else
+    % If no texture files added
     tex1 = ones(K);
     tex2 = ones(K);
     tex3 = ones(K);    
 end
-
-% Phantom
-if strcmpi(texFiles, 'Phantom')
-    simData = phantom(K);
-else
 
 % Size of figures
 prop = 1/3;
@@ -79,5 +86,4 @@ circle = sqrt(a.^2+b.^2) < radius;
 simData(yC-radius:yC+radius, xC-radius:xC+radius) = simData(yC-radius:yC+radius, xC-radius:xC+radius) + ...
                                                circle.*tex3(yC-radius:yC+radius, xC-radius:xC+radius) .* 0.33;
 
-end
 end

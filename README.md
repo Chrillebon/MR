@@ -13,7 +13,7 @@ and images from and to the format that comes out of an MRI-scanner.
         Optionally, enter a path to where texturefiles 'tex1.png', 'tex2.png' and 'tex3.png' can be
         found.
         If data is loaded, images must be real values, and fourier transformed data works best
-        as complex values.
+        as complex values, fourier-shiftet via "fftshift()".
     
     2.  If needed transform the images to fourier-transformed data via "ft2()" (fft2 with size-check).
 
