@@ -4,16 +4,16 @@ clear;
 clc;
 
 %% Load data and create histogram
-filename = 'mouseheart.mat';
+filename = 'B.mat';
 load(filename);
 
-result = ifft2(mouse);
+result = ifft2(B);
 
 figure;
 histogram(abs(result),100);
 
 %% Generate GIF of 2D plot slices
-CreateGif(abs(result), 'mouse');
+CreateGif(abs(result), 'head_ordered');
 
 %% 3d plot of data besides black data
 vol = B < 500;
