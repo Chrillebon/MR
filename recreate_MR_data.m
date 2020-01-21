@@ -9,7 +9,7 @@ clc;
 load('A.mat');
 load('B.mat');
 load('head_ordered');
-im = generate_simdata(256, 'C:\Users\chris\Desktop\Matlab\MR');
+im = generate_simdata(256, 'C:\Users\aleks\OneDrive\Skole\DTU\1. Semester\Intro til MatTek\3 Ugers\MR Projekt');
 
 % own function for DFT transform and formatting data
 dftIm = ft2(im);
@@ -22,9 +22,8 @@ ourIm = signal_limited(ourIm, 0.3);
 
 disp_slice(im);
 disp_slice(ourIm);
-disp_slice(A, [], [], 140);
 
-%% Recreating data
+%% Reconstructing data
 
 recA = ift2(A);
 recB = ift2(B);
@@ -35,7 +34,6 @@ recIm = ift2(ourIm);
 
 CreateGif(recHead, 'head');
 CreateGif(recB, 'unknown');
-disp_slice(recIm);
 
 %% Full 3D models of data
 
@@ -48,7 +46,8 @@ vA = create_vol(recA);
 %% More visualization options
 
 % Slicing through half of B
-create_vol(B, [],1:size(b,2)/2,[]);
+create_vol(recB, [],1:size(recB,2)/2,[]);
 
 % Slicing through brain A
-create_vol(A,[],[],1:140);
+create_vol(recA,[],[],1:140);
+disp_slice(recA,[],[],140);

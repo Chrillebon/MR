@@ -44,6 +44,7 @@ for i= 2:n
 end
 
 % Viewing and choosing correct slices (TD)
+figure;
 sliceViewer(data);
 
 end
