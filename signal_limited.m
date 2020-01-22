@@ -1,9 +1,10 @@
 %% Header
 
 % This function takes the fourier transformed data and places padding, the
-% value '0', at the "least significant" portion of the picture (the center), 
-% effectively reducing the accuracy of the image, keeping only the sharp
-% boundries of the image (removing the softer transitions).
+% value '0', at the "least significant" portion of the picture (the edges), 
+% effectively reducing the accuracy of the image, keeping only the plane
+% surfaces of the image to keep the ability to categorize the different
+% parts of the brain.
 % Keeping only frac of the image.
 % Only works on square images
 

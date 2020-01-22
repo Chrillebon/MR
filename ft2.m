@@ -15,6 +15,7 @@ if ~(length(size(data)) == 3 || length(size(data)) == 2)
     return;
 end
 
+% fourier-transforming and shifting all layers
 for i=1:size(data,3)
     fourierData(:,:,i) = fftshift(fft2(data(:,:,i)));
 

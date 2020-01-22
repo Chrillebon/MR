@@ -24,7 +24,7 @@ while sum(sum(data(i,:,:))) < 0.001*tot
     i = i+1;
 end
 o = size(data,1);
-% continue till significant slice found, other dir
+% continue till significant slice found, from back
 while sum(sum(data(o,:,:))) < 0.001*tot
     o = o-1;
 end
@@ -39,7 +39,7 @@ while sum(sum(data(:,i,:))) < 0.001*tot
     i = i+1;
 end
 o = size(data,2);
-% continue till significant slice found, other dir
+% continue till significant slice found, from back
 while sum(sum(data(:,o,:))) < 0.001*tot
     o = o-1;
 end
@@ -54,7 +54,7 @@ while sum(sum(data(:,:,i))) < 0.001*tot
     i = i+1;
 end
 o = size(data,3);
-% continue till significant slice found, other dir
+% continue till significant slice found, from back
 while sum(sum(data(:,:,o))) < 0.001*tot
     o = o-1;
 end

@@ -15,7 +15,7 @@ if ~(length(size(data)) == 3 || length(size(data)) == 2)
     return;
 end
 
-% Change of format
+% Inverse-fourier-transforming all layers
 for i=1:size(data,3)
     imData(:,:,i) = abs(ifft2(ifftshift(data(:,:,i))));
 end

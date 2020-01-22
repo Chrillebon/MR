@@ -4,7 +4,8 @@ This program is a small project in which you can test and visualize data
 and images from and to the format that comes out of an MRI-scanner.
 
 
-***This software is not under copyright, and can be used and shared freely if obtained***
+***This software is not under copyright, and can be used and shared 
+   freely if obtained, with reference to this project and authors***
 
 
 ^^^^HOW TO USE^^^^
@@ -12,14 +13,15 @@ and images from and to the format that comes out of an MRI-scanner.
     1.  Generate data by using the function "generate_simdata()" and enter the size of the wanted image.
         Optionally, enter a path to where texturefiles 'tex1.png', 'tex2.png' and 'tex3.png' can be
         found.
-        If data is loaded, images must be real values, and fourier transformed data works best
-        as complex values, fourier-shiftet via "fftshift()".
+        If data is loaded, images must be real values, and square in size.
     
-    2.  If needed transform the images to fourier-transformed data via "ft2()" (fft2 with size-check).
+    2.  If needed, transform the images to fourier-transformed data via "ft2()" (fft2 with size-check).
 
-    3.  When data is complex/fourier transformed, artificial noise can be added, or padding at
-        soft transitions can be added to simulate real world conditions via "signal_limited()" and
-        "addnoise()".
+    3.  When data is complex/fourier transformed,the data needs to be shifted via "fftshift()".
+        Data can also be loaded into this step, making sure that the values are complex and shifted.
+        Artificial noise can be added, or the image can be sampled by keeping only the "important"
+        parts of the image. Noise can be added to simulate real world conditions via "addnoise()",
+        while sampling the image can be done with "signal_limited()".
 
     4.  Transform data back into images/volumetric data via "ift2()" (ifft2 with size-check).
 
@@ -40,4 +42,4 @@ Made by:
 
 -Technical University of Denmark
 
----19'th January 2020
+---22'th January 2020

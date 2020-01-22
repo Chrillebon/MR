@@ -9,7 +9,7 @@
 %% Function
 function vol = create_vol(data, X, Y, Z)
 
-% Ease of use
+% Ease of use choosing volumes
 if nargin == 1
     X = 1:size(data,1);
     Y = 1:size(data,2);
@@ -31,10 +31,11 @@ figure;
 h = histogram(data(1:size(data,1),1:size(data,2),1:size(data,3)),50);
 
 % leftmost value, rightmost values saved
+% Trying to find groups of "color" values
 groups = [0,0];
 tot = sum(h.Values);
 
-% Finds average of histogram of reasonable values
+% Finds average of histogram of "reasonable" values
 % Uses af cutoff to group intervals together
 group_cut = mean(h.Values(h.Values < tot*0.1 & h.Values > tot*0.0001));
 
@@ -55,7 +56,7 @@ while i <= length(h.Values)
     i = i+1;
 end
 
-% Over this value is brain
+% Over this value is brain (rightmost group)
 boundry = (groups(length(groups)-1)-1) * h.BinWidth;
         
 % User input, if ever needed
