@@ -28,7 +28,8 @@ and images from and to the format that comes out of an MRI-scanner.
     5.  Visualizing the results can be done by slicing the model via "CreateGif()" or "disp_slice()"
         whereas a volume of the object can be estimated by "create_vol()".
 
-A lot of functionality is avalible outside of the mentioned, but discoverable in the functions themselves.
+A lot of functionality is avalible outside of the mentioned, but discoverable in the functions 
+themselves. Example usage can be found in the "make_MR_data" and "recreate_MR_data" scripts.
 
 ^^^^^^^^^^
        
